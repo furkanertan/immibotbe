@@ -48,21 +48,13 @@ async function takeReservations() {
     await dalejBtn[0].click();
 
     // Get Calendar data to choose the date
-    const calendar = await page.$x('//span[@aria-disabled="false"]')
-    // Click the first available date
-    //await calendar[0].click();
-
-    // select the first available date
-    //await calendar[0].click();
-
-    // Get layer
-    //const layer = await page.$x('//div[contains(@class, "vc-highlights vc-day-layer")]')
+    const calendarButton = await page.waitForXPath('//span[@aria-disabled="false"]');
+    await calendarButton.click();
 
     // selectTime
-    //const selectedTime = await page.$x('//select[@id="selectTime"]')
-    // get option object from the selectTime
-    //const option = await selectedTime[0].$('option:nth-child(2)')
-}
+    await page.select('select[name="selectTime"]', '[object Object]');
 
+
+}
 
 module.exports = app;
