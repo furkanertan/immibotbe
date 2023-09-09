@@ -32,9 +32,20 @@ async function takeReservations() {
   // Navigate to Immıgration Office Page
   await page.goto('https://www.bezkolejki.eu/luwlodz');
 
+  await page.waitForSelector('button.btn-secondary', { timeout: 5000 });
   // Get the right choice for the service
-  const elements = await page.$x('<xPath>')
-  await elements[0].click()
+  const firstBtn = await page.$x('(//button[contains(@class,"btn-secondary")])[4]')
+  // Click the right choice for the service
+  await firstBtn[0].click();
+
+  // Get text of the button by puppeteer
+  const text = await page.evaluate(el => el.textContent, firstBtn[0]);
+  console.log(text);
+
+  // Get Dalej button
+  const dalejBtn = await page.$x('(//button[contains(@class, \'btn-secondary\')])[10]')
+  // Click Dalej button
+  await dalejBtn[0].click();
 }
 
 module.exports = app;
